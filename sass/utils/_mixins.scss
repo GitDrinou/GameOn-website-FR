@@ -1,0 +1,5 @@
+@mixin logo-responsive($width) {   
+    width: $width;
+    height: auto;
+    margin-top: $default-size*0.75;
+}

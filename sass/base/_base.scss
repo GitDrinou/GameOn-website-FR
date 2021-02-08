@@ -1,0 +1,24 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-size: $default-size*1.125;
+  max-width: $max-width;
+  margin: 0 auto;
+}
+
+p {
+    margin-bottom: 0;
+    padding: 0.5vw;
+  }
+  
+  img {
+    width: 100%;    
+    height: auto;
+}

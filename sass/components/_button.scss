@@ -1,0 +1,48 @@
+
+.btn-signup {
+    outline: none;
+    text-transform: capitalize;
+    font-size: 1.3rem;
+    padding: 15px 23px;
+    margin-top: 59px;
+}
+
+.event__content > .btn-signup {    
+    
+    margin: 35% 0 0 0;
+    padding: 12px 35px;
+}
+
+
+.event > .btn-signup {
+    display: none;
+}
+
+.modal-btn {    
+  font-size: 145%;
+  background: #fe142f;
+  display: flex;
+  margin: auto;
+  padding: 2em;
+  color: #fff;
+  padding: 0.75rem 2.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+    &:hover {
+        background:$color-btn-secondary; 
+    }
+  }
+
+
+.subButton {
+    background:$color-btn-primary;
+    margin-top: $default-size*0.5;
+    padding: $default-size;
+    color: $color-font-event;
+    border-radius: $default-size*0.9;
+    cursor: pointer;
+    font-size: $default-size;
+    &:hover {
+        background:$color-btn-secondary; 
+    }
+}

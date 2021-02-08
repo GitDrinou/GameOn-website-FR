@@ -1,0 +1,11 @@
+{
+  "name": "p04-livrable",
+  "version": "1.0.0",
+  "description": "projet 04 - créer une landing page avec javascript",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css"
+  },
+  "author": "Sandrine BRIVAL",
+  "license": "ISC"
+}
