@@ -2,60 +2,77 @@
 /* DOM Elements
 ----------------------------------------------------------------------*/
 const blockForm = document.querySelector(".frmSignUp");
-const btnSignUp = document.getElementById("signUp");
+const btnSignUp1 = document.getElementById("signUp1");
+const btnSignUp2 = document.getElementById("signUp2");
 const icoClose = document.getElementById("close");
 const signForm = document.getElementById("reserve");
 const fields = document.querySelectorAll("input");
-
-let firstName = document.getElementById("firstName");
-let lastName = document.getElementById("lastName");
-let eMail = document.getElementById("eMail");
-let numGame = document.getElementById("numGame");
-let coche_condition = document.getElementById("checkbox1");
-
-let val_firstName = firstName.value;
-let val_lastName = lastName.value;
-let val_eMail = eMail.value;
-let val_numGame = numGame.value;
+const firstName = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
+const eMail = document.getElementById("eMail");
+const numGame = document.getElementById("numGame");
+const location1 = document.getElementById("location1");
+const locations = document.getElementsByName("location");
+const condition = document.getElementById("checkbox1");
 
 /* Variables
 ----------------------------------------------------------------------*/
 let fieldsValues = [];
 let mailReg = new RegExp(/^([\w-\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/i);
+let isStrReg = new RegExp(/[0-9]/g);
+let val_firstName = firstName.value;
+let val_lastName = lastName.value;
+let val_eMail = eMail.value;
+let val_numGame = numGame.value;
+let val_location = "";
+let nbclick = 0;
 
-/* EventListner
+
+/* EventListener calls
 ----------------------------------------------------------------------*/
 
-btnSignUp.addEventListener("click",launchForm);                    // launch the formulary
-icoClose.addEventListener("click", closeForm);                    // Close the formulary without submit
+btnSignUp1.addEventListener("click",launchForm);   // launch the formulary btn 1
+btnSignUp2.addEventListener("click",launchForm);   // launch the formulary btn 2
+icoClose.addEventListener("click", closeForm);    // Close the formulary without submit
 
-fields.forEach((field) => {
-  field.addEventListener("blur",()=> {
-    let val_field = field.value;
-    if (((field.id == "firstName") || (field.id == "lastName")) && (val_field.length < 2)) {
-      field.nextElementSibling.innerHTML = "Veuillez saisir au minimum 2 caractères.";
-      field.nextElementSibling.setAttribute("data-error-visible",true);
-    }
-    if ((field.id == "eMail") && (!mailReg.test(val_field)))  {
-      field.nextElementSibling.innerHTML = "Veuillez entrer une adresse email valide.";
-      field.nextElementSibling.setAttribute("data-error-visible",true);
-    }            
-    if ((field.id == "numGame") && (val_field > 99 ))  {
-      field.nextElementSibling.innerHTML = "Veuillez entrer un nombre entre 0 et 99.";
-      field.nextElementSibling.setAttribute("data-error-visible",true);
-    }          
-
-    fieldsValues.push(new Array(field.name, field.value));
+/**
+ * For each input field
+ * fill the fieldValues table with
+ *  - id
+ *  - value
+ * Linked with the validForm() function
+ */
+fields.forEach((field) => { 
+  field.addEventListener("blur",() => {
+    fieldsValues.push(new Array(field.id, field.value));
   });
 });
 
-console.log(coche_condition);
-/*
-coche_condition.addEventListener("click", verifCond);
-function verifCond(){
-  if (coche_condition.getAttribute("checked"))
-}
-*/
+/**
+ * fill the "val_location" 
+ * with the location radio button value clicked
+ */
+locations.forEach((location) => {
+  location.addEventListener("click", () => {
+    val_location = location.value;
+  });
+});
+
+/**
+ * change the attribute checked false
+ * when the element is clicked
+ */
+condition.addEventListener("click", () => {
+  nbclick ++;
+  if ((nbclick % 2) == 1) {
+    condition.setAttribute("checked","false");
+  }
+  else {    
+    condition.setAttribute("checked","true");
+  } 
+  
+});
+
 /* Formulary submission*/
 signForm.addEventListener("submit", (e) => {
   let valid = true;
@@ -74,8 +91,11 @@ signForm.addEventListener("submit", (e) => {
   
 /* Functions
 ----------------------------------------------------------------------*/
-
-// Change the menu according to the device ( hamburger )
+/**
+ * Navigation function
+ * Change the menu according to the device  => hamburger or not
+ */
+ 
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -85,24 +105,47 @@ function editNav() {
   }
 }
 
-// Make the formulary block visible
+/**
+ * Open function
+ * modify the display style of the formulary to open it
+ * add attribute to the condition checkbox => force checked to "true"
+ */
+
 function launchForm() {   
   blockForm.style.display = "block";
-  coche_condition.setAttribute("checked",true);
+  condition.setAttribute("checked","true");
 }
 
+/**
+ * Closing function
+ * modify the display style of the formulary to close it
+ */
 
-// Make the formulary block not visible
 function closeForm() {
   blockForm.style.display = "none";
 }
 
+/** 
+ * validation function
+ * verification about :
+ *  - number of characters
+ *  - valid email
+ *  - number of game < 99
+ *  - required fields like location and user conditions check
+ * 
+ * local variable : valid => boolean
+ * Step 1 : browse the fieldsValues table to fill the differents "val_" variables by checking the id ([n][0]) to get the value ([n][1])
+ * Step 2 : special verification. If invalid => valid = false + special error message
+ * Step 3 : return valid
+ * */ 
 
-
-// Validate all fields, with a special error message
 function validateForm() {
+
   let valid = true;
+  
   for(let i=0; i < fieldsValues.length; i++) {
+
+    // Step 1 --------------------------------------------------
     switch (fieldsValues[i][0]) {
       case "firstName": val_firstName = fieldsValues[i][1];
       case "lastName": val_lastName = fieldsValues[i][1];
@@ -111,28 +154,50 @@ function validateForm() {
     }
   }
   
-  if (val_firstName.length < 2) {
+  // Step 2 --------------------------------------------------
+  if ((val_firstName.length < 2) || (val_firstName.match(isStrReg).length > 0 ))  {
     firstName.nextElementSibling.innerHTML = "Veuillez saisir au minimum 2 caractères.";
-    //fName.nextElementSibling.setAttribute("data-error-visible",true);
     valid = false;
-  } 
-  if (val_lastName.length < 2) {
+  } else {
+    firstName.nextElementSibling.innerHTML = "";
+  }
+
+  if ((val_lastName.length < 2) || (val_firstName.match(isStrReg).length > 0 )) {
     lastName.nextElementSibling.innerHTML = "Veuillez saisir au minimum 2 caractères.";
     valid = false;
-  } 
+  } else {
+    lastName.nextElementSibling.innerHTML = "";
+  }
+
   if ((val_eMail.length == 0) || (!mailReg.test(val_eMail)))  {
     eMail.nextElementSibling.innerHTML = "Veuillez entrer une adresse email valide.";
     valid = false;
+  } else {
+    eMail.nextElementSibling.innerHTML = "";
   }
+
   if ((val_numGame.length > 0) && (val_numGame > 99 ))  {
     numGame.nextElementSibling.innerHTML = "Veuillez entrer un nombre entre 0 et 99.";
     valid = false;
-  } 
-  if (coche_condition.getAttribute("checked")== "false")  {
-    coche_condition.setAttribute("checked", true);
+  } else {
+    numGame.nextElementSibling.innerHTML = "";
   }
 
+  if (val_location == "")  {
+    location1.previousElementSibling.innerHTML = "Veuillez sélectionner une ville.<br>";
+    valid = false;
+  }  else {
+    location1.previousElementSibling.innerHTML = "";
+  }  
 
-  console.log(coche_condition);
+  if (condition.getAttribute("checked")== "false")  {
+    condition.previousElementSibling.innerHTML = "Veuillez accepter les conditions d'utilisation";
+    valid = false;
+  } else {
+    condition.previousElementSibling.innerHTML = "";
+  }  
+  
+  // Step 3 --------------------------------------------------
   return valid;
+
 }

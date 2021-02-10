@@ -105,7 +105,6 @@ body, .footer, label {
 }
 
 .topnav {
-  overflow: hidden;
   margin: 3.5%;
 }
 .topnav a {
@@ -116,19 +115,21 @@ body, .footer, label {
   padding: 0.8rem;
   margin: 0.35rem;
   text-decoration: none;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
 }
-.topnav a.active > span, .topnav a:hover > span {
-  padding-bottom: 0.03rem;
-  border-bottom: 0.1rem solid white;
-}
-.topnav .active, .topnav a:hover {
+.topnav a:hover {
   background-color: #FF0000;
   color: #FFFFFF;
   border-radius: 0.75rem;
 }
-.topnav a:hover {
-  border-bottom: none;
+.topnav a.active > span {
+  padding-bottom: 0.03rem;
+  border-bottom: 0.1rem solid #FFFFFF;
+}
+.topnav .active {
+  background-color: #FF0000;
+  color: #FFFFFF;
+  border-radius: 0.75rem;
 }
 
 .main-navbar {
@@ -139,50 +140,42 @@ body, .footer, label {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .topnav a {
     display: none;
   }
-
   .topnav a.icon {
     float: right;
+    color: #FF0000;
     display: block;
+  }
+  .topnav a.icon:hover {
+    color: #FFFFFF;
   }
 
   .topnav.responsive {
     position: relative;
   }
-
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
     top: 0;
+    color: #FF0000;
   }
-
   .topnav.responsive a {
     float: none;
     display: block;
     text-align: left;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    margin: 0.2rem;
   }
 
-  .topnav.responsive a:first-child {
-    margin-top: 3.6rem;
-  }
-}
-@media screen and (max-width: 540px) {
-  .topnav a {
-    display: none;
-  }
-
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: 0;
-  }
-
-  .topnav.responsive a:first-child {
-    margin-top: 5%;
+  .topnav.responsive .b-navText {
+    border-radius: 0.75rem;
+    background-color: #ffcccc;
+    transform-origin: top;
+    transform: translateY(3rem);
+    transition: all 2500ms;
   }
 }
 main {

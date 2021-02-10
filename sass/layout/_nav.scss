@@ -1,5 +1,5 @@
 .topnav {
-    overflow: hidden;
+    //overflow: hidden;
     margin: 3.5%;
     & a {
         float: left;
@@ -9,21 +9,22 @@
         padding: $default-size*0.8;
         margin: $default-size*0.35;
         text-decoration: none;
-        font-size: $default-size*1.25;
+        font-size: $default-size*1.2;
+        &:hover {
+            background-color: $color-bg-red;
+            color: $color-font-link;
+            border-radius: $default-size*0.75;  
+        }
     }
     & a.active > span {
         padding-bottom: $default-size*0.03;
-    border-bottom: $default-size*0.1 solid white;
+        border-bottom: $default-size*0.1 solid $color-link-underline;
     }
     & .active {
         background-color: $color-bg-red;
         color: $color-font-link;
-        border-radius: $default-size*0.75;
+        border-radius: $default-size*0.75;        
     }
-    & a:hover {
-        @extend .active;
-        border-bottom: none;
-    }  
 }
 
 .main-navbar {
@@ -32,40 +33,43 @@
 
 .topnav .icon {
     display: none;
-  }
-
-@media screen and (max-width: 768px) {
-    .topnav a {display: none;}
-    .topnav a.icon {
-        float: right;
-        display: block;
-    }
-    .topnav.responsive {position: relative;}
-    .topnav.responsive .icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-    .topnav.responsive a{
-        float: none;
-        display: block;
-        text-align: left;
-        font-size: $default-size*1.2;
-    }    
-    .topnav.responsive a:first-child {
-        margin-top: $default-size*3.6;
-    }
 }
-
-@media screen and (max-width: 540px) {
-    .topnav a {display: none;}
-    .topnav a.icon {
-      float: right;
-      display: block;
-      margin-top: 0;
+  
+@media screen and (max-width: map-get($breakpoints, tablet )) {
+    .topnav a {
+        display: none;
+        &.icon {
+            float: right;
+            color: $color-hamburger;
+            display: block;
+            &:hover {
+                color: $color-font-link;
+            }
+        }
     }
+    .topnav.responsive {
+        position: relative;
+        & .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+            color:$color-bg-red;            
+        }
+        & a {
+            float: none;
+            display: block;
+            text-align: left;
+            font-size: $default-size*1; 
+            margin: $default-size*0.2; 
+        } 
+    }
+    .topnav.responsive .b-navText {
+        border-radius: $default-size*0.75;
+        background-color: lighten($color-bg-red,40%);
+        transform-origin: top;
+        transform: translateY($default-size*3);
+        transition: all 2500ms;
     
-    .topnav.responsive a:first-child {
-        margin-top: 5%;
     }
 }
+
