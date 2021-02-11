@@ -37,7 +37,8 @@
   
 @media screen and (max-width: map-get($breakpoints, tablet )) {
     .topnav a {
-        display: none;
+        display: none;        
+        font-size: $default-size*1; 
         &.icon {
             float: right;
             color: $color-hamburger;
@@ -48,7 +49,8 @@
         }
     }
     .topnav.responsive {
-        position: relative;
+        position: relative;        
+        font-size: $default-size*1; 
         & .icon {
             position: absolute;
             right: 0;
@@ -64,11 +66,15 @@
         } 
     }
     .topnav.responsive .b-navText {
+        font-size: $default-size*0.25;
         border-radius: $default-size*0.75;
-        background-color: lighten($color-bg-red,40%);
+        background-color: lighten($color-bg-event,50%);
+        position: absolute;
+        right: 0;
+        z-index: 2;
         transform-origin: top;
         transform: translateY($default-size*3);
-        transition: all 2500ms;
+        transition: all $nav-duration;
     
     }
 }

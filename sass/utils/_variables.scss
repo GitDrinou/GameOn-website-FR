@@ -15,14 +15,16 @@ $color-error: #e54858;
 
 $default-size: 1rem;        // 16px
 
-$max-width: 1300px;
-$min-width-event: 430px;
-$max-width-form: 500px;
-
 $breakpoints: (
+    min-mobile:300px,
     mobile: 432px,
     tablet: 1024px,
     desktop: 1025px
 );
+$max-width: 1300px;
+//$min-width-event: map-get($breakpoints, min-mobile);
+$max-width-form: 500px;
 
+
+$nav-duration: 1500ms;
 $modal-duration: 0.8s;

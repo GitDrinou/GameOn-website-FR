@@ -1,5 +1,26 @@
-
-.footer {
+footer {
     margin: $default-size*1.25;
     padding: $default-size*0.63;
+    
+}
+
+.copyrights {
+    color: $color-btn-primary;
+    padding: 0;
+    font-size: $default-size;
+    margin: $default-size*2 0 $default-size;
+    font-weight: bolder;
+}
+
+@media screen and (max-width: map-get($breakpoints, tablet )) {  
+  .copyrights {    
+    font-size: $default-size;
+    margin-top: 50px;
+    text-align: center;
+  }
+}
+@media screen and (max-width: map-get($breakpoints, mobile )) {  
+    .copyrights {
+        font-size: $default-size*0.9;
+    }
 }

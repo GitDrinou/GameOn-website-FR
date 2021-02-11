@@ -2,6 +2,7 @@ main {
     padding: 2vw 2vw 0 2vw;
     border-radius: 2rem;
     margin: $default-size 20px 15px;
+    z-index: 1;
 }
 
 .event {
@@ -11,19 +12,7 @@ main {
     grid-template-columns: repeat(12, 1fr);
     overflow: hidden;
     box-shadow: $color-shadow;
-    margin-bottom: $default-size*0.63;
-    &__headline {        
-        font-size: $default-size*6;
-        font-weight: normal;
-        white-space: nowrap;
-    }
-    &__text {
-        font-size: $default-size*1.3;
-        width: 125%;
-        font-weight: normal;
-        margin-top: 57px;
-        padding: 0;
-    }
+    margin-bottom: $default-size*0.63;    
 }
 
 .event__content {
@@ -33,7 +22,7 @@ main {
     color: $color-font-event;
     position: relative;
     text-align: left;
-    min-width: $min-width-event;
+    //min-width: $min-width-event;
     & > * {
         position: relative;
         z-index: 1;
@@ -46,6 +35,18 @@ main {
         position: absolute;
         right: -80px;
         top: 0;
+    }
+    &--headline {        
+        font-size: $default-size*6;
+        font-weight: normal;
+        white-space: nowrap;
+    }
+    &--text {
+        font-size: $default-size*1.3;
+        width: 125%;
+        font-weight: normal;
+        margin-top: 57px;
+        padding: 0;
     }
 }
  
@@ -61,18 +62,10 @@ main {
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: map-get($breakpoints, tablet )) {
     .event {
         display: block;
         box-shadow: unset;
-        &__headline {
-            font-size: $default-size*4.5;
-            white-space: normal;
-        }
-        &__text {
-            width: unset;
-            font-size: $default-size*1.5;
-        }
     }
     .event__content {
         background: $color-bg-light;
@@ -80,6 +73,14 @@ main {
         padding: $default-size*1.25;
         &::after {
             content: unset;
+        }
+        &--headline {
+            font-size: $default-size*4.5;
+            white-space: normal;
+        }
+        &--text {
+            width: unset;
+            font-size: $default-size*1.5;
         }
     }
     .event__content > .btn-signup {
@@ -96,3 +97,16 @@ main {
       padding: 12px 35px;
     }
   }
+
+@media screen and (max-width: map-get($breakpoints, mobile )) {  
+    .event__content { 
+        padding: $default-size*0.5; 
+        &--headline {
+            font-size: $default-size*1.85;
+            font-weight: bold;
+        }
+        &--text { 
+            font-size: $default-size*1.1;
+        } 
+    }
+}
