@@ -27,7 +27,7 @@
           <div class="event__content--text">
             Vous aimez jouer ? Notre prochain évènement gaming est ouvert aux réservations... Places limitées !
           </div>
-          <button class="btn-signup modal-btn" id="signUp1">je m'inscris</button>
+          //<button class="btn-signup modal-btn" id="signUp1">je m'inscris</button>
         </div>
         <div class="event__img">
           <img src="img/bg_img.jpg" alt="Landing Hero picture" />
@@ -35,40 +35,38 @@
         <button class="btn-signup modal-btn" id="signUp2">je m'inscris</button>
       </section>
 
-      <div class="frmSignUp">
+      <section class="frmSignUp">
         <div class="frmSignUp__content">
           <span class="close" id="close"></span>
           <div class="frmSignUp__body">
-           <!-- <form name="reserve" id="reserve" action="index.html" method="get" onsubmit="return validate();">-->
             <form name="reserve" id="reserve" action="index.html" novalidate>
-              <div class="formData">
+              <div>
                 <label for="firstName">Prénom</label>
-                <input class="text-control" type="text" id="firstName" name="firstName" value="" required />
-                <data-error data-error-visible="false"></data-error>
+                <input type="text" id="firstName" name="firstName"/>
+                <span class="error"></span>
               </div>
-              <div class="formData">
+              <div>
                 <label for="lastName">Nom</label>
-                <input class="text-control" type="text" id="lastName" name="lastName" required />
-                <span data-error data-error-visible=false></span>
+                <input type="text" id="lastName" name="lastName"/>
+                <span class="error"></span>
               </div>
-              <div class="formData">
+              <div>
                 <label for="eMail">E-mail</label>
-                <input class="text-control" type="email" id="eMail" name="eMail" required />
-                <span data-error data-error-visible=false></span>
+                <input type="email" id="eMail" name="eMail"/>
+                <span class="error"></span>
               </div>
-              <div
-                class="formData">
+              <div>
                 <label for="birthDate">Date de naissance</label>
-                <input class="text-control" type="date" id="birthDate" name="birthDate"/><br>
+                <input type="date" id="birthDate" name="birthDate"/>
               </div>
-              <div class="formData">
+              <div>
                 <label for="numGame">À combien de tournois GameOn avez-vous déjà participé ?</label>
-                <input type="number" class="text-control" id="numGame" name="numGame" >
-                <span data-error data-error-visible=false></span>
+                <input type="number" id="numGame" name="numGame">
+                <span class="error"></span>
               </div>
               <p class="text-label">Quelles villes ?</p>
-              <div class="formData">                
-                <span data-error data-error-visible=false></span>
+              <div>                
+                <span class="error"></span>
                 <input class="checkbox-input" type="radio" id="location1" name="location" value="New York"/>
                 <label class="checkbox-label" for="location1">
                   <span class="checkbox-icon"></span> New York
@@ -96,28 +94,27 @@
               
               </div>
 
-              <div class="formData">
-                <span data-error data-error-visible=false></span>
-                <input class="checkbox-input" type="checkbox" id="checkbox1" required/>
+              <div class="bChecks">
+                <span class="error"></span>
+                <input class="checkbox-input" type="checkbox" id="checkbox1"/>
                  <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
-                </label
+                 </label>
                 
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
                 </label>
-                
-                
-                <br>
               </div>
-              <input class="btn-submit" type="submit" class="subButton" value="C'est parti" />
+              <div class="frmEnd">
+                <button class="subButton" type="submit">C'est parti !</button>
+              </div>              
             </form>
           </div>
         </div>
-      </div>
+      </section>
     </main>
     <footer>
       <div class="copyrights">

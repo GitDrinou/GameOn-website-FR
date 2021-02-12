@@ -37,7 +37,8 @@ icoClose.addEventListener("click", closeForm);    // Close the formulary without
 
 /**
  * For each input field
- * fill the fieldValues table with
+ * if the user fill each field manually 
+ *  * fill the fieldValues table with
  *  - id
  *  - value
  * Linked with the validForm() function
@@ -45,7 +46,7 @@ icoClose.addEventListener("click", closeForm);    // Close the formulary without
 fields.forEach((field) => { 
   field.addEventListener("blur",() => {
     fieldsValues.push(new Array(field.id, field.value));
-  });
+  });  
 });
 
 /**
@@ -109,11 +110,23 @@ function editNav() {
  * Open function
  * modify the display style of the formulary to open it
  * add attribute to the condition checkbox => force checked to "true"
+ * delete old values and old error message if user click on close's button
  */
 
 function launchForm() {   
   blockForm.style.display = "block";
   condition.setAttribute("checked","true");
+  fields.forEach((field) => { 
+    if (field.type == "text") {
+      field.value = "";
+    }  
+    firstName.nextElementSibling.innerHTML ="";
+    lastName.nextElementSibling.innerHTML = "";
+    eMail.nextElementSibling.innerHTML = "";
+    numGame.nextElementSibling.innerHTML = "";
+    location1.previousElementSibling.innerHTML = "";
+    condition.previousElementSibling.innerHTML = "";    
+  });
 }
 
 /**
@@ -135,17 +148,31 @@ function closeForm() {
  * 
  * local variable : valid => boolean
  * Step 1 : browse the fieldsValues table to fill the differents "val_" variables by checking the id ([n][0]) to get the value ([n][1])
+ *          if the user have an automatic entry, fill the differents "val_" whith the field value.
  * Step 2 : special verification. If invalid => valid = false + special error message
  * Step 3 : return valid
  * */ 
 
+
 function validateForm() {
 
   let valid = true;
+  let valReg_firstName, valReg_lastName;
+  
+  if (val_firstName.match(isStrReg) == null) { 
+    valReg_firstName = 0;
+  } else if (val_lastName.match(isStrReg) == null) { 
+    valReg_lastName = 0;
+  } else {
+    valReg_firstName = val_firstName.match(isStrReg).length; 
+    valReg_lastName = val_lastName.match(isStrReg).length; 
+  }
+  
   
   for(let i=0; i < fieldsValues.length; i++) {
 
     // Step 1 --------------------------------------------------
+    // with the fieldValues table ------------------------------
     switch (fieldsValues[i][0]) {
       case "firstName": val_firstName = fieldsValues[i][1];
       case "lastName": val_lastName = fieldsValues[i][1];
@@ -154,16 +181,25 @@ function validateForm() {
     }
   }
   
+  // with the field value ------------------------------
+  if (val_firstName == "") { val_firstName = firstName.value;}
+  if (val_lastName == "") { val_firstName = lastName.value;}
+  if (val_eMail == "") { val_eMail = eMail.value;}
+
+  
   // Step 2 --------------------------------------------------
-  if ((val_firstName.length < 2) || (val_firstName.match(isStrReg).length > 0 ))  {
-    firstName.nextElementSibling.innerHTML = "Veuillez saisir au minimum 2 caractères.";
+
+  if ((val_firstName.length < 2) || (valReg_firstName > 0 ))  {
+    firstName.nextElementSibling.innerHTML = "Veuillez saisir au minimum 2 caractères alphabétiques.";
+    firstName.className = "field--error";
     valid = false;
   } else {
     firstName.nextElementSibling.innerHTML = "";
   }
 
-  if ((val_lastName.length < 2) || (val_firstName.match(isStrReg).length > 0 )) {
+  if ((val_lastName.length < 2) || (valReg_lastName > 0 )) {
     lastName.nextElementSibling.innerHTML = "Veuillez saisir au minimum 2 caractères.";
+    lastName.className = "field--error";
     valid = false;
   } else {
     lastName.nextElementSibling.innerHTML = "";
@@ -171,13 +207,15 @@ function validateForm() {
 
   if ((val_eMail.length == 0) || (!mailReg.test(val_eMail)))  {
     eMail.nextElementSibling.innerHTML = "Veuillez entrer une adresse email valide.";
+    eMail.className = "field--error";
     valid = false;
   } else {
     eMail.nextElementSibling.innerHTML = "";
   }
 
   if ((val_numGame.length > 0) && (val_numGame > 99 ))  {
-    numGame.nextElementSibling.innerHTML = "Veuillez entrer un nombre entre 0 et 99.";
+    numGame.nextElementSibling.innerHTML = "Veuillez entrer un nombre entre 0 et 99.";    
+    numGame.className = "field--error";
     valid = false;
   } else {
     numGame.nextElementSibling.innerHTML = "";
