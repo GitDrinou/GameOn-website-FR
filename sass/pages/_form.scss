@@ -162,3 +162,14 @@ input {
 .field--error {
   border: $default-size*0.18 solid $color-error;
 }
+
+.b-congrats {
+  @extend .frmSignUp;
+  text-align: center;
+  &__content {
+    @extend .frmSignUp__content;
+    padding: $default-size*10 $default-size*4;
+    font-size: $default-size*2.3;
+    font-weight: normal;
+  }
+}
