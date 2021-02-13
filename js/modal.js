@@ -29,7 +29,73 @@ let val_numGame = numGame.value;
 let val_location = "";
 let nbclick = 0;
 
+<<<<<<< HEAD
  
+=======
+
+/* EventListener calls
+----------------------------------------------------------------------*/
+
+btnSignUp1.addEventListener("click",launchForm);   // launch the formulary btn 1
+btnSignUp2.addEventListener("click",launchForm);   // launch the formulary btn 2
+icoClose.addEventListener("click", closeForm);    // Close the formulary without submit
+
+/**
+ * For each input field
+ * if the user fill each field manually 
+ *  * fill the fieldValues table with
+ *  - id
+ *  - value
+ * Linked with the validForm() function
+ */
+fields.forEach((field) => { 
+  field.addEventListener("blur",() => {
+    fieldsValues.push(new Array(field.id, field.value));
+  });  
+});
+
+/**
+ * fill the "val_location" 
+ * with the location radio button value clicked
+ */
+locations.forEach((location) => {
+  location.addEventListener("click", () => {
+    val_location = location.value;
+  });
+});
+
+/**
+ * change the attribute checked false
+ * when the element is clicked
+ */
+condition.addEventListener("click", () => {
+  nbclick ++;
+  if ((nbclick % 2) == 1) {
+    condition.setAttribute("checked","false");
+  }
+  else {    
+    condition.setAttribute("checked","true");
+  } 
+  
+});
+
+/* Formulary submission*/
+signForm.addEventListener("submit", (e) => {
+  let valid = true;
+  e.preventDefault();
+  
+  if(validateForm()){    
+    firstName.nextElementSibling.innerHTML = "";
+    lastName.nextElementSibling.innerHTML = "";
+    eMail.nextElementSibling.innerHTML = "";
+    numGame.nextElementSibling.innerHTML = "";
+    console.log("on envoie ! tutti va bene");
+     // e.target.submit();
+  } 
+});
+
+  
+>>>>>>> 3718daa39da77d65f7f4b59fa22a41e223659128
 /* Functions
 ----------------------------------------------------------------------*/
 /**
@@ -99,11 +165,26 @@ function validateForm() {
 
   let valid = true;
   let valReg_firstName, valReg_lastName;
+<<<<<<< HEAD
 
+=======
+  
+  if (val_firstName.match(isStrReg) == null) { 
+    valReg_firstName = 0;
+  } else if (val_lastName.match(isStrReg) == null) { 
+    valReg_lastName = 0;
+  } else {
+    valReg_firstName = val_firstName.match(isStrReg).length; 
+    valReg_lastName = val_lastName.match(isStrReg).length; 
+  }
+  
+  
+>>>>>>> 3718daa39da77d65f7f4b59fa22a41e223659128
   for(let i=0; i < fieldsValues.length; i++) {
 
     // Step 1 --------------------------------------------------
     // with the fieldValues table ------------------------------
+<<<<<<< HEAD
     if (fieldsValues[i][0] == "firstName") {val_firstName = fieldsValues[i][1];}
     if (fieldsValues[i][0] == "lastName") {val_lastName = fieldsValues[i][1];}
     if (fieldsValues[i][0] == "eMail") {val_eMail = fieldsValues[i][1];}
@@ -127,6 +208,26 @@ function validateForm() {
 
   if ((val_firstName.length < 2) || (valReg_firstName > 0 ))  {
     firstName.nextElementSibling.innerHTML = "Veuillez saisir au minimum 2 caractères.";
+=======
+    switch (fieldsValues[i][0]) {
+      case "firstName": val_firstName = fieldsValues[i][1];
+      case "lastName": val_lastName = fieldsValues[i][1];
+      case "eMail": val_eMail = fieldsValues[i][1];
+      case "numGame": val_numGame = fieldsValues[i][1];
+    }
+  }
+  
+  // with the field value ------------------------------
+  if (val_firstName == "") { val_firstName = firstName.value;}
+  if (val_lastName == "") { val_firstName = lastName.value;}
+  if (val_eMail == "") { val_eMail = eMail.value;}
+
+  
+  // Step 2 --------------------------------------------------
+
+  if ((val_firstName.length < 2) || (valReg_firstName > 0 ))  {
+    firstName.nextElementSibling.innerHTML = "Veuillez saisir au minimum 2 caractères alphabétiques.";
+>>>>>>> 3718daa39da77d65f7f4b59fa22a41e223659128
     firstName.className = "field--error";
     valid = false;
   } else {

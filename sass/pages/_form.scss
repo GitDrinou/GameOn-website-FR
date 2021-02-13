@@ -144,21 +144,32 @@ input {
 
 .bChecks {
   margin-top: $default-size*0.5;
+<<<<<<< HEAD
 }
 
 .frmEnd {
   display: flex;
   justify-content: center;
+=======
+>>>>>>> 3718daa39da77d65f7f4b59fa22a41e223659128
 }
 /* Erreurs */
 
+<<<<<<< HEAD
 .error {
   font-size: $default-size*0.8;  
   color: $color-error;
   margin-bottom: $default-size*0.4;
   //line-height: $default-size*0.25; 
+=======
+.frmEnd {
+  display: flex;
+  justify-content: center;
+>>>>>>> 3718daa39da77d65f7f4b59fa22a41e223659128
 }
+/* Erreurs */
 
+<<<<<<< HEAD
 .field--error {
   border: $default-size*0.18 solid $color-error;
 }
@@ -173,3 +184,15 @@ input {
     font-weight: normal;
   }
 }
+=======
+.error {
+  font-size: $default-size*0.8;  
+  color: $color-error;
+  margin-bottom: $default-size*0.4;
+  //line-height: $default-size*0.25; 
+}
+
+.field--error {
+  border: $default-size*0.18 solid $color-error;
+}
+>>>>>>> 3718daa39da77d65f7f4b59fa22a41e223659128
