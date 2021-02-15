@@ -1,6 +1,6 @@
 .topnav {
     //overflow: hidden;
-    margin: 3.5%;
+    margin: 3%;
     & a {
         float: left;
         display: block;
@@ -34,7 +34,9 @@
 .topnav .icon {
     display: none;
 }
+
   
+
 @media screen and (max-width: map-get($breakpoints, tablet )) {
     .topnav a {
         display: none;        
@@ -74,8 +76,7 @@
         z-index: 2;
         transform-origin: top;
         transform: translateY($default-size*3);
-        transition: all $nav-duration;
-    
+        transition: all $nav-duration;    
     }
 }
 
