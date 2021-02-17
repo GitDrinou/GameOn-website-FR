@@ -32,6 +32,72 @@ let val_location = "";
 let nbclick = 0;
 let valid_bDate = true;
  
+/* EVENTS CALLS
+----------------------------------------------------------------------*/
+
+btnSignUp1.addEventListener("click",launchForm);   // launch the formulary btn 1
+btnSignUp2.addEventListener("click",launchForm);   // launch the formulary btn 2
+icoClose.addEventListener("click", closeForm);    // Close the formulary without submit
+btnClose.addEventListener("click", closeForm);    // Close the congrats window after submit
+
+/**
+ * For each input field
+ * if the user fill each field manually 
+ *  * fill the fieldValues table with
+ *  - id
+ *  - value
+ * Linked with the validForm() function
+ */
+fields.forEach((field) => { 
+  field.addEventListener("blur",() => {
+    fieldsValues.push(new Array(field.id, field.value));
+  });  
+});
+console.log(fieldsValues);
+
+/**
+ * fill the "val_location" 
+ * with the location radio button value clicked
+ */
+locations.forEach((location) => {
+  location.addEventListener("click", () => {
+    val_location = location.value;
+  });
+});
+
+/**
+ * change the attribute checked false
+ * when the element is clicked
+ */
+condition.addEventListener("click", () => {
+  nbclick ++;
+  if ((nbclick % 2) == 1) {
+    condition.setAttribute("checked","false");
+  }
+  else {    
+    condition.setAttribute("checked","true");
+  } 
+  
+});
+
+/* Formulary submission*/
+signForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if(validateForm()){    
+    firstName.nextElementSibling.innerHTML = "";
+    lastName.nextElementSibling.innerHTML = "";
+    eMail.nextElementSibling.innerHTML = "";
+    birthDate.nextElementSibling.innerHTML = "";
+    numGame.nextElementSibling.innerHTML = "";
+
+    blockForm.style.display = "none";
+    blockCongrats.style.display = "block";
+     // e.target.submit();
+
+  } 
+});
+ 
+
 /* FUNCTIONS
 ----------------------------------------------------------------------*/
 /**
@@ -114,6 +180,7 @@ function validateForm() {
     if (fieldsValues[i][0] == "birthDate") {val_birthDate = fieldsValues[i][1];}
     if (fieldsValues[i][0] == "numGame") {val_numGame = fieldsValues[i][1];}
   }
+  
 
   // with the field value ------------------------------
   if (val_firstName == "") { val_firstName = firstName.value;}
@@ -134,8 +201,13 @@ function validateForm() {
     let splitBDate = val_birthDate.split("-");
     let yearNow = new Date();
     let maxAge = 65;
-    if ((parseInt(splitBDate[0]) >= yearNow.getFullYear()) || (parseInt(splitBDate[0]) < (yearNow.getFullYear()- maxAge))) { 
+    if (parseInt(splitBDate[0]) >= yearNow.getFullYear()) { 
       valid_bDate = false;
+    } else if (parseInt(splitBDate[0]) < (yearNow.getFullYear()- maxAge)) {
+      valid_bDate = false;
+    }
+    else {
+      valid_bDate = true;
     }
   }
   
@@ -168,7 +240,7 @@ function validateForm() {
     eMail.nextElementSibling.innerHTML = "";
     eMail.classList.remove("field--error");
   }
-  if ((val_birthDate=="") || (!valid_bDate))  {
+  if ((val_birthDate=="") || (valid_bDate == false))  {
     birthDate.nextElementSibling.innerHTML = "Veuillez entrer une date de naissance / année invalide.";
     birthDate.className = "field--error";
     valid = false;
@@ -206,68 +278,3 @@ function validateForm() {
 }
 /** End validation form function --------------------------------------- */
 
-
-/* EVENTS CALLS
-----------------------------------------------------------------------*/
-
-btnSignUp1.addEventListener("click",launchForm);   // launch the formulary btn 1
-btnSignUp2.addEventListener("click",launchForm);   // launch the formulary btn 2
-icoClose.addEventListener("click", closeForm);    // Close the formulary without submit
-btnClose.addEventListener("click", closeForm);    // Close the congrats window after submit
-
-/**
- * For each input field
- * if the user fill each field manually 
- *  * fill the fieldValues table with
- *  - id
- *  - value
- * Linked with the validForm() function
- */
-fields.forEach((field) => { 
-  field.addEventListener("blur",() => {
-    fieldsValues.push(new Array(field.id, field.value));
-  });  
-});
-
-/**
- * fill the "val_location" 
- * with the location radio button value clicked
- */
-locations.forEach((location) => {
-  location.addEventListener("click", () => {
-    val_location = location.value;
-  });
-});
-
-/**
- * change the attribute checked false
- * when the element is clicked
- */
-condition.addEventListener("click", () => {
-  nbclick ++;
-  if ((nbclick % 2) == 1) {
-    condition.setAttribute("checked","false");
-  }
-  else {    
-    condition.setAttribute("checked","true");
-  } 
-  
-});
-
-/* Formulary submission*/
-signForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if(validateForm()){    
-    firstName.nextElementSibling.innerHTML = "";
-    lastName.nextElementSibling.innerHTML = "";
-    eMail.nextElementSibling.innerHTML = "";
-    birthDate.nextElementSibling.innerHTML = "";
-    numGame.nextElementSibling.innerHTML = "";
-
-    blockForm.style.display = "none";
-    blockCongrats.style.display = "block";
-     // e.target.submit();
-
-  } 
-});
- 
