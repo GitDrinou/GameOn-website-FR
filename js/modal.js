@@ -42,7 +42,7 @@ btnClose.addEventListener("click", closeForm);    // Close the congrats window a
 
 /**
  * For each input field
- * if the user fill each field manually 
+ * if the user fill each field manually //
  *  * fill the fieldValues table with
  *  - id
  *  - value
@@ -53,7 +53,7 @@ fields.forEach((field) => {
     fieldsValues.push(new Array(field.id, field.value));
   });  
 });
-console.log(fieldsValues);
+//console.log(fieldsValues);
 
 /**
  * fill the "val_location" 

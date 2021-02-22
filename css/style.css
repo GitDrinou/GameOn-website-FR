@@ -349,6 +349,16 @@ main {
   overflow: auto;
   background-color: rgba(26, 39, 156, 0.4);
 }
+@media screen and (max-width: 432px) {
+  .frmSignUp, .b-congrats {
+    top: 3.5rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .frmSignUp, .b-congrats {
+    top: 6rem;
+  }
+}
 .frmSignUp__content, .b-congrats__content {
   margin: 5% auto;
   width: 100%;
@@ -515,6 +525,12 @@ input {
 
 .field--error {
   border: 0.18rem solid #e54858;
+}
+
+@media screen and (max-width: 432px) {
+  .frmSignUp, .b-congrats {
+    top: 3.5rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
